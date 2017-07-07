@@ -1,14 +1,13 @@
 package com.mobileffort.show_dirs;
 
 import java.io.File;
-import java.util.ArrayDeque;
 import java.util.logging.Logger;
 
-public class ViewRunnable extends Thread {
+public class ViewThread extends Thread {
 	private File mainDir;
 	private int filesCount;
 
-	public ViewRunnable(String mainDirName) {
+	public ViewThread(String mainDirName) {
 		this.mainDir = new File(mainDirName);
 	}
 
@@ -21,8 +20,7 @@ public class ViewRunnable extends Thread {
 
 	private void showDir(File dir) {
 		for (File entry : dir.listFiles()) {
-
-			if (this.interrupted()) {
+			if (entry == null || interrupted()) {
 				log.info("for inter!");
 				break;
 				// throw new InterruptedException();
@@ -35,9 +33,9 @@ public class ViewRunnable extends Thread {
 		}
 	}
 
-	int getResults() {
+	public void getResults(StringBuilder sb) {
 		this.interrupt();
-		return filesCount;
+		sb.append(String.format("%s;%s", mainDir, filesCount) + System.getProperty("line.separator"));
 	}
 
 	private Logger log = Logger.getLogger(getClass().getName());
