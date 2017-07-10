@@ -47,7 +47,7 @@ public class ViewManager {
 			for (Integer n = 0;; n++) {
 				if (it.isPressed() || !th.isAlive()) {
 					th.interrupt();
-					th.getResults(sb);
+					sb.append(th.toString());
 					break;
 				}
 				try {
@@ -58,14 +58,19 @@ public class ViewManager {
 			}
 
 		}
-		log.info(sb.toString());
+
+		if (it.isPressed()) {
+			log.info(sb.toString());
+		} else {
+			try (PrintWriter writer = new PrintWriter(outFile)) {
+				writer.write(sb.toString());
+			} catch (FileNotFoundException e) {
+				log.warning("Resoults file not found");
+			}
+		}
 		log.info("Seconds passed: " + (new Date((new Date()).getTime() - time)).getSeconds());
 
-		try (PrintWriter writer = new PrintWriter(outFile)) {
-			writer.write(sb.toString());
-		} catch (FileNotFoundException e) {
-			log.warning("Resoults file not found");
-		}
+		System.exit(0);
 	}
 
 	private Logger log = Logger.getLogger(getClass().getName());

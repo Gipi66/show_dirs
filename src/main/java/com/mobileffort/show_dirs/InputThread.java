@@ -16,9 +16,8 @@ public class InputThread extends Thread {
 			System.out.println("Для остановки нажмите Enter: ");
 			String input;
 			while (!buttonPressed) {
-				input = reader.next();
+				input = reader.nextLine();
 				if (input != null) {
-					System.out.println("input: " + input);
 					buttonPressed = true;
 					break;
 				}

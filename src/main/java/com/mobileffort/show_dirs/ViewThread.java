@@ -5,20 +5,30 @@ import java.util.logging.Logger;
 
 public class ViewThread extends Thread {
 	private File mainDir;
-	private int filesCount;
+	private long filesCount;
+	private Integer id;
 
 	public ViewThread(String mainDirName) {
 		this.mainDir = new File(mainDirName);
 	}
 
+	public ViewThread(String mainDirName, int id) {
+		this(mainDirName);
+		this.id = id;
+	}
+
 	@Override
 	public void run() {
 		if (mainDir.isDirectory()) {
-			showDir(mainDir);
+			try {
+				showDir(mainDir);
+			} catch (NullPointerException e) {
+				// pass
+			}
 		}
 	}
 
-	private void showDir(File dir) {
+	private void showDir(File dir) throws NullPointerException {
 		for (File entry : dir.listFiles()) {
 			if (entry == null || interrupted()) {
 				log.info("for inter!");
@@ -33,9 +43,13 @@ public class ViewThread extends Thread {
 		}
 	}
 
-	public void getResults(StringBuilder sb) {
+	public String toString() {
 		this.interrupt();
-		sb.append(String.format("%s;%s", mainDir, filesCount) + System.getProperty("line.separator"));
+		return String.format("%s;%s", mainDir, filesCount) + System.getProperty("line.separator");
+	}
+
+	public String toString(String leftAlignFormat) {
+		return String.format(leftAlignFormat, id != null ? id : "?", mainDir.getName(), filesCount);
 	}
 
 	private Logger log = Logger.getLogger(getClass().getName());
