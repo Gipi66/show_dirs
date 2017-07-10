@@ -96,14 +96,14 @@ public class ViewManager {
 
 			String leftAlignFormat = "| %-4s | %-20s | %-6d |\n";
 
-			sb.append("+------+------------+-------------+\n");
-			sb.append("|  ID  |    Name    |    Count    |\n");
-			sb.append("+------+------------+-------------+\n");
+			sb.append("+------+----------------------+--------+\n");
+			sb.append("|  ID  |         Name         |  Count |\n");
+			sb.append("+------+----------------------+--------+\n");
 
 			for (ViewThread th : threadsQue) {
 				sb.append(th.toString(leftAlignFormat));
 			}
-			sb.append("+--------+------------+-------------+\n");
+			sb.append("+------+----------------------+--------+\n");
 
 			System.out.println(sb.toString());
 		} else {
@@ -117,7 +117,7 @@ public class ViewManager {
 		/*
 		 * show total time
 		 */
-		log.info("Total time: " + (new Date((new Date()).getTime() - time)).getSeconds());
+		log.info(String.format("Total time: %s sec.", (new Date((new Date()).getTime() - time)).getSeconds()));
 
 		/*
 		 * close application
