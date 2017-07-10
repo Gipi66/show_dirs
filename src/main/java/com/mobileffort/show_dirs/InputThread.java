@@ -3,10 +3,22 @@ package com.mobileffort.show_dirs;
 import java.io.InputStream;
 import java.util.Scanner;
 
+/**
+ * This class for check enter in a separate thread
+ * 
+ * @author pc2
+ *
+ */
 public class InputThread extends Thread {
 	private InputStream is;
 	private boolean buttonPressed;
 
+	/**
+	 * Constructor for InputThread
+	 * 
+	 * @param is
+	 *            the InputStream
+	 */
 	public InputThread(InputStream is) {
 		this.is = is;
 	}
@@ -25,6 +37,11 @@ public class InputThread extends Thread {
 		}
 	}
 
+	/**
+	 * Check for button pressed
+	 * 
+	 * @return buttonPressed indicator if the button was pressed
+	 */
 	public boolean isPressed() {
 		return buttonPressed;
 	}
