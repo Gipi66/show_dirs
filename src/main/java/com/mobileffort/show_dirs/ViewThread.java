@@ -43,13 +43,19 @@ public class ViewThread extends Thread {
 		}
 	}
 
+	private String getDirName() {
+		return mainDir.getName().length() != 0 ? mainDir.getName() : mainDir.getAbsolutePath();
+	}
+
 	public String toString() {
 		this.interrupt();
-		return String.format("%s;%s", mainDir, filesCount) + System.getProperty("line.separator");
+		System.out.println();
+
+		return String.format("%s;%s", getDirName(), filesCount) + System.getProperty("line.separator");
 	}
 
 	public String toString(String leftAlignFormat) {
-		return String.format(leftAlignFormat, id != null ? id : "?", mainDir.getName(), filesCount);
+		return String.format(leftAlignFormat, id != null ? id : "?", getDirName(), filesCount);
 	}
 
 	private Logger log = Logger.getLogger(getClass().getName());

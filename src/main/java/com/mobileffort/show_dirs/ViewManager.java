@@ -60,13 +60,27 @@ public class ViewManager {
 		}
 
 		if (it.isPressed()) {
-			log.info(sb.toString());
+			sb = new StringBuilder();
+
+			String leftAlignFormat = "| %-6s | %-10s | %-11d |\n";
+
+			sb.append("+--------+------------+-------------+\n");
+			sb.append("|   ID   |    Name    |    Count    |\n");
+			sb.append("+--------+------------+-------------+\n");
+
+			for (ViewThread th : threadsQue) {
+				sb.append(th.toString(leftAlignFormat));
+			}
+			sb.append("+--------+------------+-------------+\n");
+
+			System.out.println(sb.toString());
 		} else {
 			try (PrintWriter writer = new PrintWriter(outFile)) {
 				writer.write(sb.toString());
 			} catch (FileNotFoundException e) {
 				log.warning("Resoults file not found");
 			}
+
 		}
 		log.info("Seconds passed: " + (new Date((new Date()).getTime() - time)).getSeconds());
 
