@@ -58,12 +58,13 @@ public class ViewThread extends Thread {
 
 	public String toString() {
 		this.interrupt();
-		return String.format("%s;%s", getDirName(), filesCount) + System.getProperty("line.separator");
+		return String.format("%s;%s\n", getDirName(), filesCount);
 	}
 
 	public String toString(String leftAlignFormat) {
 		return String.format(leftAlignFormat, getDirId(), getDirName(), filesCount);
 	}
 
+	@SuppressWarnings("unused")
 	private Logger log = Logger.getLogger(getClass().getName());
 }

@@ -1,6 +1,7 @@
 package com.mobileffort.show_dirs;
 
 import java.io.BufferedReader;
+import static java.lang.System.out;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -105,7 +106,7 @@ public class ViewManager {
 			}
 			sb.append("+------+----------------------+--------+\n");
 
-			System.out.println(sb.toString());
+			out.println(sb.toString());
 		} else {
 			try (PrintWriter writer = new PrintWriter(outFile)) {
 				writer.write(sb.toString());
