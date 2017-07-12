@@ -1,6 +1,7 @@
 package com.mobileffort.show_dirs;
 
 import java.io.InputStream;
+import static java.lang.System.out;
 import java.util.Scanner;
 
 /**
@@ -25,7 +26,7 @@ public class InputThread extends Thread {
 
 	public void run() {
 		try (Scanner reader = new Scanner(is)) {
-			System.out.println("Для остановки нажмите Enter: ");
+			out.println("Для остановки нажмите Enter: ");
 			String input;
 			while (!buttonPressed) {
 				input = reader.nextLine();
